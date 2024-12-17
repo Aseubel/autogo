@@ -2,6 +2,7 @@ package com.aseubel.autogo.controller;
 
 import com.aseubel.autogo.common.Response;
 import com.aseubel.autogo.pojo.entity.Page;
+import com.aseubel.autogo.service.IPageService;
 import com.aseubel.autogo.service.impl.PageService;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -21,7 +22,7 @@ import java.util.List;
 public class PageController {
 
     @Autowired
-    private PageService pageService;
+    private IPageService pageService;
 
     /**
      * 获取所有页面
