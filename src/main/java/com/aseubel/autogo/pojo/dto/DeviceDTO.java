@@ -1,22 +1,18 @@
-package com.aseubel.autogo.pojo.entity;
+package com.aseubel.autogo.pojo.dto;
 
-import com.baomidou.mybatisplus.annotation.TableId;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
 /**
  * @author aseubel
- * @description 机器人平台设备实体类
- * @date 2024/12/16
+ * @date 2024/12/17
  */
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
-public class Device {
+public class DeviceDTO {
 
-    @TableId
-    private String deviceId;
     private String typeId;
     private String deviceName;
     private String image;

@@ -1,5 +1,6 @@
 package com.aseubel.autogo.pojo.entity;
 
+import com.baomidou.mybatisplus.annotation.TableId;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -14,6 +15,7 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 public class Treatise {
 
+    @TableId
     private String treatiseId;
     private String typeId;
     private String title;

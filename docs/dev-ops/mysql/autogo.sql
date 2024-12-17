@@ -57,7 +57,6 @@ CREATE TABLE `member` (
     `grade` INT UNSIGNED NOT NULL DEFAULT 0 COMMENT '年级',
     `major` VARCHAR ( 64 ) NOT NULL DEFAULT '' COMMENT '专业方向',
     `experience` TEXT COMMENT '个人经历',
-    `entry_time` DATE COMMENT '加入时间',
     `image` VARCHAR(64) NOT NULL DEFAULT '' COMMENT '图片地址',
     `github` VARCHAR(32) NOT NULL DEFAULT '' COMMENT 'github',
     `blog` VARCHAR(32) NOT NULL DEFAULT '' COMMENT '博客',

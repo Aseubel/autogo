@@ -1,25 +1,21 @@
-package com.aseubel.autogo.pojo.entity;
+package com.aseubel.autogo.pojo.dto;
 
-import com.baomidou.mybatisplus.annotation.TableId;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
 /**
  * @author aseubel
- * @description 研究实体类
- * @date 2024/12/16
+ * @date 2024/12/17
  */
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
-public class Research {
+public class TreatiseDTO {
 
-    @TableId
-    private String researchId;
     private String typeId;
     private String title;
+    private String author;
+    private String publish;
     private String link;
-    private String image;
-
 }
