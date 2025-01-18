@@ -26,7 +26,7 @@ import java.io.InputStream;
 @Component
 public class AliOSSUtil {
 
-    String endpoint = "oss-cn-guangzhou.aliyuncs.com";
+    String endpoint = "oss-cn-guangzhou-internal.aliyuncs.com";
     // 填写Bucket名称，例如examplebucket。
     String bucketName = "yangaseubel";
     // 填写Bucket所在地域。以华东1（杭州）为例，Region填写为cn-hangzhou。
