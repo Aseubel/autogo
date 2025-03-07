@@ -25,6 +25,8 @@ public class FileController {
     @Autowired
     private AliOSSUtil aliOSSUtil;
 
+    private static final String appName = "autogo";
+
     /**
      * 上传文件
      * @param file
@@ -33,7 +35,7 @@ public class FileController {
      */
     @PostMapping("/upload")
     public Response<String> upload(MultipartFile file) throws ClientException {
-        String fileName = UUID.randomUUID() + Objects.requireNonNull(file.getOriginalFilename()).substring(file.getOriginalFilename().lastIndexOf("."));
+        String fileName = appName + "/" + UUID.randomUUID() + Objects.requireNonNull(file.getOriginalFilename()).substring(file.getOriginalFilename().lastIndexOf("."));
         return Response.success(aliOSSUtil.upload(file,fileName));
     }
 

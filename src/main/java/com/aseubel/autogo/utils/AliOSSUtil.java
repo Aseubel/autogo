@@ -6,14 +6,10 @@ import com.aliyun.oss.common.auth.EnvironmentVariableCredentialsProvider;
 import com.aliyun.oss.common.comm.SignVersion;
 import com.aliyun.oss.model.PutObjectRequest;
 import com.aliyun.oss.model.PutObjectResult;
-import lombok.AllArgsConstructor;
-import lombok.Data;
-import lombok.NoArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Component;
 import org.springframework.web.multipart.MultipartFile;
 
-import java.io.File;
 import java.io.IOException;
 import java.io.InputStream;
 
@@ -26,12 +22,12 @@ import java.io.InputStream;
 @Component
 public class AliOSSUtil {
 
-    String endpoint = "oss-cn-guangzhou-internal.aliyuncs.com";
+    private static final String endpoint = "oss-cn-guangzhou.aliyuncs.com";
     // 填写Bucket名称，例如examplebucket。
-    String bucketName = "yangaseubel";
+    private static final String bucketName = "yangaseubel";
     // 填写Bucket所在地域。以华东1（杭州）为例，Region填写为cn-hangzhou。
-    String region = "cn-guangzhou";
-
+    private static final String region = "cn-guangzhou";
+    private static final String appName = "autogo";
     /**
      * 文件上传
      * @param image      图像字节码

@@ -2,7 +2,9 @@ package com.aseubel.autogo.controller;
 
 import com.aseubel.autogo.common.Response;
 import com.aseubel.autogo.pojo.entity.Page;
+import com.aseubel.autogo.pojo.entity.Type;
 import com.aseubel.autogo.service.IPageService;
+import com.aseubel.autogo.service.ITypeService;
 import com.aseubel.autogo.service.impl.PageService;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -24,6 +26,9 @@ public class PageController {
     @Autowired
     private IPageService pageService;
 
+    @Autowired
+    private ITypeService typeService;
+
     /**
      * 获取所有页面
      * @return 页面列表
@@ -42,5 +47,4 @@ public class PageController {
     public Response updatePage(@RequestBody Page page) {
         return pageService.updateById(page) ? Response.success() : Response.fail("修改失败");
     }
-
 }
