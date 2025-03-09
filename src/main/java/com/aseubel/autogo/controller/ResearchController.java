@@ -49,7 +49,7 @@ public class ResearchController {
      * 修改研究信息
      */
     @PutMapping("/update")
-    public Response updateResearch(Research research) {
+    public Response updateResearch(@RequestBody Research research) {
         return researchService.updateById(research) ? Response.success() : Response.fail("更新研究信息失败");
     }
 
@@ -57,7 +57,7 @@ public class ResearchController {
      * 添加研究
      */
     @PostMapping("/")
-    public Response addResearch(Research research) {
+    public Response addResearch(@RequestBody Research research) {
         research.setResearchId(UUID.randomUUID().toString());
         return researchService.save(research) ? Response.success() : Response.fail("添加研究失败");
     }

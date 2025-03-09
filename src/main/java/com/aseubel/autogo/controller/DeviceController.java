@@ -49,7 +49,7 @@ public class DeviceController {
      * 修改设备信息
      */
     @PutMapping("/update")
-    public Response updateDevice(Device device) {
+    public Response updateDevice(@RequestBody Device device) {
         return deviceService.updateById(device) ? Response.success() : Response.fail("更新设备信息失败");
     }
 
@@ -57,7 +57,7 @@ public class DeviceController {
      * 添加设备
      */
     @PostMapping("")
-    public Response addDevice(Device device) {
+    public Response addDevice(@RequestBody Device device) {
         device.setDeviceId(UUID.randomUUID().toString());
         return deviceService.save(device) ? Response.success() : Response.fail("添加设备失败");
     }

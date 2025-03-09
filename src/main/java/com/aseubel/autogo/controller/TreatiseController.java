@@ -49,7 +49,7 @@ public class TreatiseController {
      * 修改论著信息详情
      */
     @PutMapping("/update")
-    public Response updateTreatise(Treatise treatise) {
+    public Response updateTreatise(@RequestBody Treatise treatise) {
         return treatiseService.updateById(treatise) ? Response.success() : Response.fail("更新论著失败");
     }
 
@@ -57,7 +57,7 @@ public class TreatiseController {
      * 添加论著
      */
     @PostMapping("")
-    public Response addTreatise(Treatise treatise) {
+    public Response addTreatise(@RequestBody Treatise treatise) {
         treatise.setTreatiseId(UUID.randomUUID().toString());
         return treatiseService.save(treatise) ? Response.success() : Response.fail("添加论著失败");
     }

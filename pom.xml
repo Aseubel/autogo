@@ -90,6 +90,7 @@
     </dependencyManagement>
 
     <build>
+        <finalName>autogo-app</finalName>
         <plugins>
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
@@ -104,11 +105,19 @@
             <plugin>
                 <groupId>org.springframework.boot</groupId>
                 <artifactId>spring-boot-maven-plugin</artifactId>
-                <version>${spring-boot.version}</version>
+                <version>2.6.13</version>
                 <configuration>
                     <mainClass>com.aseubel.autogo.AutogoApplication</mainClass>
-                    <skip>true</skip>
+                    <!--                    <skip>true</skip>-->
                 </configuration>
+                <executions>
+                    <execution>
+                        <id>repackage</id>
+                        <goals>
+                            <goal>repackage</goal>
+                        </goals>
+                    </execution>
+                </executions>
             </plugin>
         </plugins>
     </build>

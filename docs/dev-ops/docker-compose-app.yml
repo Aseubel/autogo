@@ -4,7 +4,7 @@ version: '3.3'
 # 你需要修改system为你自身系统的仓库名
 services:
   polaris:
-    image: crpi-5tzwiznwaw34lfca.cn-guangzhou.personal.cr.aliyuncs.com/aseubel/autogo:latest
+    image: autogo:latest
     container_name: autogo
     restart: on-failure
     ports:

@@ -41,7 +41,7 @@ public class IndexController {
      * 更新首页信息
      */
     @PutMapping("/")
-    public Response updateIndex(IndexInfo indexInfo) {
+    public Response updateIndex(@RequestBody IndexInfo indexInfo) {
         return indexService.updateById(indexInfo) ? Response.success() : Response.fail("更新首页信息失败");
     }
 

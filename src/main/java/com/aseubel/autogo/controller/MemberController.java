@@ -49,7 +49,7 @@ public class MemberController {
      * 更新团队成员信息
      */
     @PutMapping("/update")
-    public Response updateMember(Member member) {
+    public Response updateMember(@RequestBody Member member) {
         return memberService.updateById(member) ? Response.success() : Response.fail("更新团队成员信息失败");
     }
 
@@ -57,7 +57,7 @@ public class MemberController {
      * 添加团队成员
      */
     @PostMapping("/")
-    public Response addMember(Member member) {
+    public Response addMember(@RequestBody Member member) {
         member.setMemberId(UUID.randomUUID().toString());
         return memberService.save(member) ? Response.success() : Response.fail("添加团队成员失败");
     }
