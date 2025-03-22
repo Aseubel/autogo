@@ -4,7 +4,7 @@ version: '3.3'
 # 你需要修改system为你自身系统的仓库名
 services:
   polaris:
-    image: autogo:latest
+    image: crpi-5tzwiznwaw34lfca.cn-guangzhou.personal.cr.aliyuncs.com/aseubel/utopia:0.03
     container_name: autogo
     restart: on-failure
     ports:
@@ -19,6 +19,8 @@ services:
       - SERVER_PORT=611
       - REDIS_SDK_CONFIG_HOST=redis
       - REDIS_SDK_CONFIG_PORT=6379
+      - OSS_ACCESS_KEY_ID=YOUR_ACCESS_KEY_ID
+      - OSS_ACCESS_KEY_SECRET=YOUR_ACCESS_KEY_SECRET
     volumes:
       - ./log:/data/log
     logging:
