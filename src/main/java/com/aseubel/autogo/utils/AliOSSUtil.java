@@ -4,12 +4,14 @@ import com.aliyun.oss.*;
 import com.aliyun.oss.common.auth.CredentialsProviderFactory;
 import com.aliyun.oss.common.auth.EnvironmentVariableCredentialsProvider;
 import com.aliyun.oss.common.comm.SignVersion;
+import com.aliyun.oss.model.OSSObject;
 import com.aliyun.oss.model.PutObjectRequest;
 import com.aliyun.oss.model.PutObjectResult;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Component;
 import org.springframework.web.multipart.MultipartFile;
 
+import java.io.ByteArrayOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
 
@@ -132,6 +134,63 @@ public class AliOSSUtil {
                 ossClient.shutdown();
             }
         }
+    }
+
+    public byte[] download(String objectName) throws com.aliyuncs.exceptions.ClientException {
+        // 从环境变量中获取访问凭证。运行本代码示例之前，请确保已设置环境变量OSS_ACCESS_KEY_ID和OSS_ACCESS_KEY_SECRET。
+        EnvironmentVariableCredentialsProvider credentialsProvider = CredentialsProviderFactory.newEnvironmentVariableCredentialsProvider();
+
+        // 创建OSSClient实例。
+        ClientBuilderConfiguration clientBuilderConfiguration = new ClientBuilderConfiguration();
+        clientBuilderConfiguration.setSignatureVersion(SignVersion.V4);
+        OSS ossClient = OSSClientBuilder.create()
+                .endpoint(endpoint)
+                .credentialsProvider(credentialsProvider)
+                .clientConfiguration(clientBuilderConfiguration)
+                .region(region)
+                .build();
+        try {
+            // ossObject包含文件所在的存储空间名称、文件名称、文件元数据以及一个输入流。
+            OSSObject ossObject = ossClient.getObject(bucketName, objectName);
+            InputStream inputStream = ossObject.getObjectContent();
+            ByteArrayOutputStream byteArrayOutputStream = new ByteArrayOutputStream();
+            // 读取文件内容到字节数组。
+            byte[] readBuffer = new byte[1024];
+            int bytesRead;
+            while ((bytesRead = inputStream.read(readBuffer)) != -1) {
+                byteArrayOutputStream.write(readBuffer, 0, bytesRead);
+            }
+            // 获取最终的字节数组。
+            byte[] fileBytes = byteArrayOutputStream.toByteArray();
+            // 打印字节数组的长度。
+            // System.out.println("Downloaded file size: " + fileBytes.length + " bytes");
+            // 数据读取完成后，获取的流必须关闭，否则会造成连接泄漏，导致请求无连接可用，程序无法正常工作。
+            inputStream.close();
+            byteArrayOutputStream.close();
+            // ossObject对象使用完毕后必须关闭，否则会造成连接泄漏，导致请求无连接可用，程序无法正常工作。
+            ossObject.close();
+            return fileBytes;
+        } catch (OSSException oe) {
+            log.error("Caught an OSSException, which means your request made it to OSS, "
+                    + "but was rejected with an error response for some reason.");
+            log.error("Error Message:{}", oe.getErrorMessage());
+            log.error("Error Code:{}", oe.getErrorCode());
+            log.error("Request ID:{}", oe.getRequestId());
+            log.error("Host ID:{}", oe.getHostId());
+            throw oe;
+        } catch (ClientException ce) {
+            log.error("Caught an ClientException, which means the client encountered "
+                    + "a serious internal problem while trying to communicate with OSS, "
+                    + "such as not being able to access the network.");
+            log.error("Error Message:{}", ce.getMessage());
+        } catch (IOException e) {
+            log.error("Caught an IOException, which means an error occurred while reading the file.");
+        } finally {
+            if (ossClient != null) {
+                ossClient.shutdown();
+            }
+        }
+        return null;
     }
 
     public String getFileName(String path) {
